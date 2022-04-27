@@ -11,10 +11,11 @@ const getYearMonthDate = (date) => {
 
 export const prepareRRuleData = (data) => {
   const [year, month, date] = getYearMonthDate(data.dtstart)
+  const [hour = 0, minute = 0] = data.time?.split(':')
   const options = {
     freq: data.freq,
     interval: data.interval,
-    dtstart: new Date(Date.UTC(year, month, date)),
+    dtstart: new Date(Date.UTC(year, month, date, hour, minute)),
     tzid: data.timezone
   }
   if (data.freq === RRule.WEEKLY) options.wkst = data.weekday
@@ -31,11 +32,6 @@ export const prepareRRuleData = (data) => {
     options.until = new Date(Date.UTC(year, month, date, 23, 59, 59))
   }
   if (data.endType === 'after') options.count = data.count
-  if (data.time) {
-    const [hour, minute] = data.time.split(':')
-    options.byhour = [hour]
-    options.byminute = [minute]
-  }
   return options
 }
 
