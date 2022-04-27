@@ -1,0 +1,33 @@
+{
+  "name": "rrule-demo",
+  "version": "1.0.0",
+  "description": "RRule Demo for recurring",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "author": "Devang Bhuva",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
+    "moment": "^2.29.3",
+    "moment-timezone": "^0.5.34",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-hook-form": "^7.30.0",
+    "rrule": "^2.6.9",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "autoprefixer": "^10.4.4",
+    "buffer": "^6.0.3",
+    "parcel": "^2.4.1",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.24"
+  }
+}
