@@ -48,7 +48,7 @@ const OutputComponent = ({ rrule, rruleOptions, timezone, getValues }) => {
           <div className='flex-row space-y-4'>
             <span className='font-bold'>Next Occurrence After{ afterDateTime && <span> ({ moment.tz(afterDateTime, timezone).format('llll') })</span> }:</span>
             {
-              nextOccurence && 
+              afterDateTime && 
               <table className="min-w-full divide-y divide-gray-300 text-center">
                 <thead>
                   <tr>
@@ -62,8 +62,8 @@ const OutputComponent = ({ rrule, rruleOptions, timezone, getValues }) => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-green-200">
                   <tr>
-                    <td className="py-1.5 font-light">{moment.tz(nextOccurence, timezone).format('llll')}</td>
-                    <td className="py-1.5 font-light">{moment.utc(nextOccurence).format('llll')}</td>
+                    <td className="py-1.5 font-light">{nextOccurence ? moment.tz(nextOccurence, timezone).format('llll') : '-'}</td>
+                    <td className="py-1.5 font-light">{nextOccurence ? moment.utc(nextOccurence).format('llll') : '-'}</td>
                   </tr>
                 </tbody>
               </table>

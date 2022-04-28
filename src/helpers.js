@@ -53,7 +53,7 @@ export const calculateNextOccurence = (rrule, timezone, afterDate, afterTime) =>
   const nextOccurence = rrule.after(afterDateTime, true)
   return { 
     afterDateTime: parseDateTimeWithTimezone(afterDateTime, timezone), 
-    nextOccurence: parseDateTimeWithTimezone(nextOccurence, timezone) 
+    nextOccurence: nextOccurence && parseDateTimeWithTimezone(nextOccurence, timezone) 
   }
 }
 
