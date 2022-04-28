@@ -16,7 +16,6 @@ export const prepareRRuleData = (data) => {
     freq: data.freq,
     interval: data.interval,
     dtstart: new Date(Date.UTC(year, month, date, hour, minute)),
-    tzid: data.timezone
   }
   if (data.freq === RRule.WEEKLY) options.wkst = data.weekday
   if (data.freq === RRule.MONTHLY) {

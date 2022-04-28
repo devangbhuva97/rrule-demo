@@ -11,7 +11,10 @@ const OutputComponent = ({ rrule, rruleOptions, timezone, getValues }) => {
     return {
       rruleString: rrule.toString(),
       rruleText: rrule.toText(),
-      occurrences: rrule.all((date, i) => i < 100),
+      occurrences: rrule.all((date, i) => i < 10).map(dt => {
+        const utcDateTime = moment.utc(dt).format('L LT') // Convert datetime into UTC without timezone
+        return moment.tz(utcDateTime, "L LT", true, timezone) // Add timezone in UTC datetime without changing datetime
+      }),
       afterDateTime,
       nextOccurence
     }
