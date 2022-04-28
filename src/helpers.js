@@ -34,13 +34,27 @@ export const prepareRRuleData = (data) => {
   return options
 }
 
-export const calculateNextOccurence = (rrule, afterDate, afterTime) => {
+const parseDateTimeWithTimezone = (dt, timezone = 'UTC') => {
+  const utcDateTime = moment.utc(dt).format('L LT') // Convert datetime into UTC without timezone
+  return moment.tz(utcDateTime, "L LT", true, timezone) // Add timezone in UTC datetime without changing datetime
+}
+
+export const calculateAllOccurences = (rrule, timezone) => {
+  return rrule.all((date, i) => i < 10).map(dt => {
+    return parseDateTimeWithTimezone(dt, timezone)
+  })
+}
+
+export const calculateNextOccurence = (rrule, timezone, afterDate, afterTime) => {
   if (!afterDate) return {}
   const [year, month, date] = getYearMonthDate(afterDate)
   const [hour = 0, minute = 0] = afterTime?.split(':')
   const afterDateTime = new Date(Date.UTC(year, month, date, hour, minute))
   const nextOccurence = rrule.after(afterDateTime, true)
-  return { afterDateTime, nextOccurence }
+  return { 
+    afterDateTime: parseDateTimeWithTimezone(afterDateTime, timezone), 
+    nextOccurence: parseDateTimeWithTimezone(nextOccurence, timezone) 
+  }
 }
 
 export const prepareIntervalLabel = (freq) => {

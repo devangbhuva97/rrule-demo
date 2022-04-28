@@ -1,20 +1,17 @@
 import moment from 'moment-timezone'
 import { useMemo } from 'react';
-import { calculateNextOccurence } from './helpers'
+import { calculateNextOccurence, calculateAllOccurences } from './helpers'
 
 const OutputComponent = ({ rrule, rruleOptions, timezone, getValues }) => {
   
   const { rruleString, rruleText, occurrences, afterDateTime, nextOccurence } = useMemo(() => {
     if (!rrule) return {}
     const [afterDate, afterTime] = getValues(['afterDate', 'afterTime'])
-    const { afterDateTime, nextOccurence } = calculateNextOccurence(rrule, afterDate, afterTime)
+    const { afterDateTime, nextOccurence } = calculateNextOccurence(rrule, timezone, afterDate, afterTime)
     return {
       rruleString: rrule.toString(),
       rruleText: rrule.toText(),
-      occurrences: rrule.all((date, i) => i < 10).map(dt => {
-        const utcDateTime = moment.utc(dt).format('L LT') // Convert datetime into UTC without timezone
-        return moment.tz(utcDateTime, "L LT", true, timezone) // Add timezone in UTC datetime without changing datetime
-      }),
+      occurrences: calculateAllOccurences(rrule, timezone),
       afterDateTime,
       nextOccurence
     }
