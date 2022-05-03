@@ -17,7 +17,7 @@ export const prepareRRuleData = (data) => {
     interval: data.interval,
     dtstart: new Date(Date.UTC(year, month, date, hour, minute)),
   }
-  if (data.freq === RRule.WEEKLY) options.wkst = RRule[data.weekday]
+  if (data.freq === RRule.WEEKLY) options.byweekday = RRule[data.weekday]
   if (data.freq === RRule.MONTHLY) {
     if (data.onMonthly === 0) options.bymonthday = data.day
     else options.byweekday = RRule[data.weekday].nth(data.onMonthly)
