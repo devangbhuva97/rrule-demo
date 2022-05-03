@@ -17,7 +17,7 @@ export const prepareRRuleData = (data) => {
     interval: data.interval,
     dtstart: new Date(Date.UTC(year, month, date, hour, minute)),
   }
-  if (data.freq === RRule.WEEKLY) options.wkst = data.weekday
+  if (data.freq === RRule.WEEKLY) options.wkst = RRule[data.weekday]
   if (data.freq === RRule.MONTHLY) {
     if (data.onMonthly === 0) options.bymonthday = data.day
     else options.byweekday = RRule[data.weekday].nth(data.onMonthly)
@@ -40,7 +40,7 @@ const parseDateTimeWithTimezone = (dt, timezone = 'UTC') => {
 }
 
 export const calculateAllOccurences = (rrule, timezone) => {
-  return rrule.all((date, i) => i < 10).map(dt => {
+  return rrule.all((date, i) => i < 100).map(dt => {
     return parseDateTimeWithTimezone(dt, timezone)
   })
 }
