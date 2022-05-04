@@ -45,7 +45,7 @@ const SchedulingSettings = ({ register, handleSubmit, onSubmit, errors, freq, on
             </select>
           }
           {
-            (freq === RRule.WEEKLY || (freq === RRule.MONTHLY && onMonthly > 0)) &&
+            (freq === RRule.WEEKLY || (freq === RRule.MONTHLY && (onMonthly > 0 || onMonthly < 0))) &&
             <select
               {...register("weekday")}
               id="weekday"
