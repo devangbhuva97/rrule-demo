@@ -36,7 +36,7 @@ export const prepareRRuleData = (data) => {
 
 const parseDateTimeWithTimezone = (dt, timezone = 'UTC') => {
   const timezoneOffset = moment.tz(timezone).utcOffset()
-  return moment.utc(dt).add(timezoneOffset, 'minutes') // utc to timezone without changing timezone
+  return moment.utc(dt).subtract(timezoneOffset, 'minutes') // utc to timezone without changing timezone
 }
 
 export const calculateAllOccurences = (rrule, timezone) => {
