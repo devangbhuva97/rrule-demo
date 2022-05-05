@@ -244,7 +244,7 @@ export const SCHEMA = yup.object({
   month: yup.mixed().when('freq', (freq) => {
     if (freq === RRule.YEARLY) return yup.mixed().oneOf(ALLOWED_MONTHS).required()
   }),
-  dtstart: yup.date().nullable().transform((curr, orig) => orig === '' ? null : curr).required(),
+  startDate: yup.date().nullable().transform((curr, orig) => orig === '' ? null : curr).required(),
   endType: yup.mixed().oneOf(['', 'by', 'after']).required(),
   until: yup.mixed().when('endType', (endType) => {
     if (endType === 'by') return yup.date().required()
@@ -252,7 +252,7 @@ export const SCHEMA = yup.object({
   count: yup.mixed().when('endType', (endType) => {
     if (endType === 'after') return yup.number().nullable().positive().integer().required()
   }),
-  time: yup.string().optional(),
+  startTime: yup.string().optional(),
   timezone: yup.string().required(),
   afterDate: yup.date().nullable().transform((curr, orig) => orig === '' ? null : curr).optional(),
   afterTime: yup.string().optional(),
@@ -265,7 +265,7 @@ export const DEFAULT_VALUES = {
   weekday: RRule.MO.toString(),
   month: 1,
   interval: 1,
-  dtstart: moment().format('YYYY-MM-DD'),
+  startDate: moment().format('YYYY-MM-DD'),
   timezone: moment.tz.guess()
 }
 

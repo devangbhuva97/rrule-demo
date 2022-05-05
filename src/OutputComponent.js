@@ -7,11 +7,11 @@ const OutputComponent = ({ rrule, rruleOptions, timezone, getValues }) => {
   const { rruleString, rruleText, occurrences, afterDateTime, nextOccurence } = useMemo(() => {
     if (!rrule) return {}
     const [afterDate, afterTime] = getValues(['afterDate', 'afterTime'])
-    const { afterDateTime, nextOccurence } = calculateNextOccurence(rrule, timezone, afterDate, afterTime)
+    const { afterDateTime, nextOccurence } = calculateNextOccurence(rrule, afterDate, afterTime)
     return {
       rruleString: rrule.toString(),
       rruleText: rrule.toText(),
-      occurrences: calculateAllOccurences(rrule, timezone),
+      occurrences: calculateAllOccurences(rrule),
       afterDateTime,
       nextOccurence
     }
