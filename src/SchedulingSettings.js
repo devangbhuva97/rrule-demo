@@ -165,11 +165,11 @@ const SchedulingSettings = ({ register, handleSubmit, onSubmit, errors, freq, on
             </div>
             <div className="mt-4">
               <input
-                {...register("time")}
+                {...register("startTime")}
                 type="time"
-                name="time"
-                id="time"
-                className={`block shadow-sm text-sm border-gray-300 rounded-md ${errors?.time ? 'border-red-300 focus:border-red-300 !ring-red-300' : ''}`}
+                name="startTime"
+                id="startTime"
+                className={`block shadow-sm text-sm border-gray-300 rounded-md ${errors?.startTime ? 'border-red-300 focus:border-red-300 !ring-red-300' : ''}`}
               />
             </div>
           </div>
