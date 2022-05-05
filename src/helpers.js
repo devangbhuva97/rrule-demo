@@ -27,7 +27,7 @@ export const prepareRRuleData = (data) => {
     options.bymonthday = data.day
   }
   if (data.endType === 'by') {
-    const [year, month, date] =getYearMonthDate(data.until)
+    const [year, month, date] = getYearMonthDate(data.until)
     options.until = new Date(Date.UTC(year, month, date, 23, 59, 59))
   }
   if (data.endType === 'after') options.count = data.count
@@ -35,8 +35,8 @@ export const prepareRRuleData = (data) => {
 }
 
 const parseDateTimeWithTimezone = (dt, timezone = 'UTC') => {
-  const utcDateTime = moment.utc(dt).format('L LT') // Convert datetime into UTC without timezone
-  return moment.tz(utcDateTime, "L LT", true, timezone) // Add timezone in UTC datetime without changing datetime
+  const timezoneOffset = moment.tz(timezone).utcOffset()
+  return moment.utc(dt).add(timezoneOffset, 'minutes') // utc to timezone without changing timezone
 }
 
 export const calculateAllOccurences = (rrule, timezone) => {
